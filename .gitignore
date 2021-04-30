@@ -112,3 +112,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# MAC:
+.DS_Store
+.svn
+/.build
+/Packages
+xcuserdata/
