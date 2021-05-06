@@ -1,0 +1,36 @@
+
+1、虚拟环境 启动 flask
+cd /usr/local/projects/python-code/lee
+
+source .env/bin/activate
+
+export FLASK_APP=flaskr
+
+export FLASK_ENV=development
+
+flask run
+
+
+
+2、shell零时环境
+pipenv shell
+
+export FLASK_APP=flaskr
+
+export FLASK_ENV=development
+
+
+
+3、sqlite脚本运行（启动环境后）
+flask init-db
+
+
+4、查看flask进程
+ps ax | grep flask
+
+
+5、nginx配置路径
+find / -name 'nginx.conf'
+
+
+

@@ -11,5 +11,5 @@ CREATE TABLE wallet_record_table (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   apply_userid INTEGER NOT NULL,
   status INTEGER DEFAULT 0,
-  apply_time INTEGER DEFAULT 0
+  apply_time DOUBLE DEFAULT 0
 );

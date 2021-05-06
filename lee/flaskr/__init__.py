@@ -109,7 +109,7 @@ def create_app(test_config=None):
         data = []
 
         for record in result:
-            model = dict(id=record['id'],time=record['apply_time'])
+            model = dict(id=record['id'],apply_time=record['apply_time'])
             data.append(model)
 
         response['code'] = 1
@@ -135,19 +135,42 @@ def create_app(test_config=None):
     # 处理一个+1请求    
     # id = 1
     # status = -1、1
+    # lover_userid = 2,去加1
     @app.route('/wallet_handle', methods=['get'])
     def wallet_handle(): 
         response = dict(code=-1,msg='')
 
         record_id = request.args.get('id',0) #
         status = request.args.get('status',0) #
+        lover_userid = request.args.get('lover_userid',0) #
 
         updateQuery = "UPDATE wallet_record_table SET status = {} WHERE id = {}".format(status,record_id)
         insert_excute(updateQuery)
+        # update user_table SET wallet = wallet + 1 WHERE userid = 2
+        if (int(status) == 1):
+            updateQuery2 = "UPDATE user_table SET wallet = wallet + 1 WHERE userid = {}".format(lover_userid)
+            print(updateQuery2)
+            insert_excute(updateQuery2)
+
         response['code'] = 1
         response['msg'] = '处理成功'
-
         return response
 
+
+# 处理一个+1请求    
+    # id = 1
+    # status = -1、1
+    # lover_userid = 2,去加1
+    @app.route('/wallet_use', methods=['get'])
+    def wallet_use(): 
+        response = dict(code=-1,msg='')
+        userid = request.args.get('userid',0) #
+        updateQuery = "UPDATE user_table SET wallet = wallet - 1 WHERE userid = {}".format(userid)
+        print(updateQuery)
+        insert_excute(updateQuery)
+
+        response['code'] = 1
+        response['msg'] = '处理成功'
+        return response
 
     return app
